@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">PAM Acitivity Intent</string>
+    <string name="label_username">Nama pengguna</string>
+    <string name="label_firstname">Nama Depan</string>
+    <string name="label_lastname">Nama Belakang</string>
+    <string name="label_password_confirm">Konfirmasi Password</string>
+    <string name="label_password">Kata sandi</string>
+    <string name="btn_title_login">Masuk</string>
+    <string name="btn_title_signup">Daftar</string>
+    <string name="btn_label_ok">Daftar</string>
+    <string name="not_have_account">Belum Punya Akun? </string>
+    <string name="all_have_account">Sudah Punya Akun? </string>
+</resources>
