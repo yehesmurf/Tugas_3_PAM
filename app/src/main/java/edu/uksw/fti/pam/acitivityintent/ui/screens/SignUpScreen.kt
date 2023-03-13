@@ -33,6 +33,7 @@ fun SignUpForm(
     btnOnClickAction: (String?) -> Unit
 ) {
     val merahmuda = "#D93F3F"
+    val merahmuda2 = "#F7F7F7"
 
     val lContext = LocalContext.current
 
@@ -41,101 +42,104 @@ fun SignUpForm(
     var usernameInput by remember { mutableStateOf("") }
     var passwordInput by remember { mutableStateOf("") }
     var passwordConfirInput by remember { mutableStateOf("") }
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(20.dp)
-            .padding(top = 50.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
-    ) {
-        Image(painter = painterResource(id = R.drawable.image_4), contentDescription = "")
-        OutlinedTextField(
-            value = firstnameInput,
-            onValueChange = { firstnameInput = it },
-            label = { Text(text = stringResource(R.string.label_firstname)) },
+
+    Surface(color = Color(merahmuda2.toColorInt()), modifier = Modifier.fillMaxSize()) {
+        Column(
             modifier = Modifier
-                .fillMaxWidth(),
-            leadingIcon = {
-                Icon(
-                    imageVector = Icons.Filled.Person, contentDescription = "",
-                    tint = Color(merahmuda.toColorInt())
-                )
-            }
-        )
-        OutlinedTextField(
-            value = lastnameInput,
-            onValueChange = { lastnameInput = it },
-            label = { Text(text = stringResource(R.string.label_lastname)) },
-            modifier = Modifier
-                .fillMaxWidth(),
-            leadingIcon = {
-                Icon(
-                    imageVector = Icons.Filled.Person, contentDescription = "",
-                    tint = Color(merahmuda.toColorInt())
-                )
-            }
-        )
-        OutlinedTextField(
-            value = usernameInput,
-            onValueChange = { usernameInput = it },
-            label = { Text(text = stringResource(R.string.label_username)) },
-            modifier = Modifier
-                .fillMaxWidth(),
-            leadingIcon = {
-                Icon(
-                    imageVector = Icons.Filled.Person, contentDescription = "",
-                    tint = Color(merahmuda.toColorInt())
-                )
-            }
-        )
-        OutlinedTextField(
-            value = passwordInput ,
-            onValueChange = { passwordInput = it },
-            label = { Text(text = stringResource(R.string.label_password)) },
-            visualTransformation = PasswordVisualTransformation(),
-            modifier = Modifier
-                .fillMaxWidth(),
-            leadingIcon = {
-                Icon(
-                    imageVector = Icons.Filled.Lock, contentDescription = "",
-                    tint = Color(merahmuda.toColorInt())
-                )
-            }
-        )
-        OutlinedTextField(
-            value = passwordConfirInput ,
-            onValueChange = { passwordConfirInput = it },
-            label = { Text(text = stringResource(R.string.label_password_confirm)) },
-            visualTransformation = PasswordVisualTransformation(),
-            modifier = Modifier
-                .fillMaxWidth(),
-            leadingIcon = {
-                Icon(
-                    imageVector = Icons.Filled.Lock, contentDescription = "",
-                    tint = Color(merahmuda.toColorInt())
-                )
-            }
-        )
-        Button(
-            colors = ButtonDefaults.buttonColors(backgroundColor = Color(merahmuda.toColorInt())),
-            modifier = Modifier.fillMaxWidth(),
-            onClick = {
-                btnOnClickAction(usernameInput)
-                btnOnClickAction(passwordInput)
-            }
+                .fillMaxSize()
+                .padding(20.dp)
+                .padding(top = 50.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            Text(stringResource(R.string.btn_label_ok), color = Color.White, style = MaterialTheme.typography.h5)
-        }
-        ClickableText(text = buildAnnotatedString {
-            append(text = stringResource(id = R.string.all_have_account))
-            withStyle(style = SpanStyle(color = Color(merahmuda.toColorInt())), ) {
-                append(text = stringResource(id = R.string.btn_title_login))
-            }
-        }, onClick = {
-            lContext.startActivity(
-                Intent(lContext, MainActivity::class.java)
+            Image(painter = painterResource(id = R.drawable.image_4), contentDescription = "")
+            OutlinedTextField(
+                value = firstnameInput,
+                onValueChange = { firstnameInput = it },
+                label = { Text(text = stringResource(R.string.label_firstname)) },
+                modifier = Modifier
+                    .fillMaxWidth(),
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Filled.Person, contentDescription = "",
+                        tint = Color(merahmuda.toColorInt())
+                    )
+                }
             )
-        })
+            OutlinedTextField(
+                value = lastnameInput,
+                onValueChange = { lastnameInput = it },
+                label = { Text(text = stringResource(R.string.label_lastname)) },
+                modifier = Modifier
+                    .fillMaxWidth(),
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Filled.Person, contentDescription = "",
+                        tint = Color(merahmuda.toColorInt())
+                    )
+                }
+            )
+            OutlinedTextField(
+                value = usernameInput,
+                onValueChange = { usernameInput = it },
+                label = { Text(text = stringResource(R.string.label_username)) },
+                modifier = Modifier
+                    .fillMaxWidth(),
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Filled.Person, contentDescription = "",
+                        tint = Color(merahmuda.toColorInt())
+                    )
+                }
+            )
+            OutlinedTextField(
+                value = passwordInput ,
+                onValueChange = { passwordInput = it },
+                label = { Text(text = stringResource(R.string.label_password)) },
+                visualTransformation = PasswordVisualTransformation(),
+                modifier = Modifier
+                    .fillMaxWidth(),
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Filled.Lock, contentDescription = "",
+                        tint = Color(merahmuda.toColorInt())
+                    )
+                }
+            )
+            OutlinedTextField(
+                value = passwordConfirInput ,
+                onValueChange = { passwordConfirInput = it },
+                label = { Text(text = stringResource(R.string.label_password_confirm)) },
+                visualTransformation = PasswordVisualTransformation(),
+                modifier = Modifier
+                    .fillMaxWidth(),
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Filled.Lock, contentDescription = "",
+                        tint = Color(merahmuda.toColorInt())
+                    )
+                }
+            )
+            Button(
+                colors = ButtonDefaults.buttonColors(backgroundColor = Color(merahmuda.toColorInt())),
+                modifier = Modifier.fillMaxWidth(),
+                onClick = {
+                    btnOnClickAction(usernameInput)
+                    btnOnClickAction(passwordInput)
+                }
+            ) {
+                Text(stringResource(R.string.btn_label_ok), color = Color.White, style = MaterialTheme.typography.h5)
+            }
+            ClickableText(text = buildAnnotatedString {
+                append(text = stringResource(id = R.string.all_have_account))
+                withStyle(style = SpanStyle(color = Color(merahmuda.toColorInt())), ) {
+                    append(text = stringResource(id = R.string.btn_title_login))
+                }
+            }, onClick = {
+                lContext.startActivity(
+                    Intent(lContext, MainActivity::class.java)
+                )
+            })
+        }
     }
 }
 

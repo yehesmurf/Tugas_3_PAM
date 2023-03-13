@@ -18,6 +18,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
@@ -42,11 +43,14 @@ fun ArticleScreen() {
     ) {
         Image(painter = painterResource(id = R.drawable.image_2), contentDescription = "",
             modifier = Modifier.padding())
-        Text(text = "Orang-Orang Baik :", modifier = Modifier.padding(horizontal = 15.dp), Color.White, style = MaterialTheme.typography.h5, fontWeight = FontWeight.SemiBold)
+        Text(stringResource(id = R.string.orang), modifier = Modifier.padding(horizontal = 15.dp), Color.White, style = MaterialTheme.typography.h5, fontWeight = FontWeight.SemiBold)
         Card(
             elevation = 4.dp,
             shape = RoundedCornerShape(size = 12.dp),
-            modifier = Modifier.padding(horizontal = 15.dp).fillMaxWidth().padding(top = 10.dp)
+            modifier = Modifier
+                .padding(horizontal = 15.dp)
+                .fillMaxWidth()
+                .padding(top = 10.dp)
         ) {
             Row(
                 modifier = Modifier.padding(all = 12.dp),
@@ -77,7 +81,10 @@ fun ArticleScreen() {
         Card(
             elevation = 4.dp,
             shape = RoundedCornerShape(size = 12.dp),
-            modifier = Modifier.padding(horizontal = 15.dp).fillMaxWidth().padding(top = 10.dp)
+            modifier = Modifier
+                .padding(horizontal = 15.dp)
+                .fillMaxWidth()
+                .padding(top = 10.dp)
         ) {
             Row(
                 modifier = Modifier.padding(all = 12.dp),
@@ -108,7 +115,10 @@ fun ArticleScreen() {
         Card(
             elevation = 4.dp,
             shape = RoundedCornerShape(size = 12.dp),
-            modifier = Modifier.padding(horizontal = 15.dp).fillMaxWidth().padding(top = 10.dp)
+            modifier = Modifier
+                .padding(horizontal = 15.dp)
+                .fillMaxWidth()
+                .padding(top = 10.dp)
         ) {
             Row(
                 modifier = Modifier.padding(all = 12.dp),
@@ -139,7 +149,10 @@ fun ArticleScreen() {
         Card(
             elevation = 4.dp,
             shape = RoundedCornerShape(size = 12.dp),
-            modifier = Modifier.padding(horizontal = 15.dp).fillMaxWidth().padding(top = 10.dp)
+            modifier = Modifier
+                .padding(horizontal = 15.dp)
+                .fillMaxWidth()
+                .padding(top = 10.dp)
         ) {
             Row(
                 modifier = Modifier.padding(all = 12.dp),
@@ -170,7 +183,10 @@ fun ArticleScreen() {
         Card(
             elevation = 4.dp,
             shape = RoundedCornerShape(size = 12.dp),
-            modifier = Modifier.padding(horizontal = 15.dp).fillMaxWidth().padding(top = 10.dp)
+            modifier = Modifier
+                .padding(horizontal = 15.dp)
+                .fillMaxWidth()
+                .padding(top = 10.dp)
         ) {
             Row(
                 modifier = Modifier.padding(all = 12.dp),
@@ -198,9 +214,10 @@ fun ArticleScreen() {
                 )
             }
         }
-        Text(text = "Artikel :", modifier = Modifier
-            .padding(horizontal = 15.dp)
-            .padding(top = 30.dp), Color.White, style = MaterialTheme.typography.h5, fontWeight = FontWeight.SemiBold)
+        Text(
+            stringResource(id = R.string.artikel), modifier = Modifier
+                .padding(horizontal = 15.dp)
+                .padding(top = 30.dp), Color.White, style = MaterialTheme.typography.h5, fontWeight = FontWeight.SemiBold)
         Card(
             modifier = Modifier
                 .fillMaxWidth()

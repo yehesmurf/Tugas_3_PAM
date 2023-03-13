@@ -31,6 +31,9 @@ fun NavigationGraph(
         composable(BottomNavItems.Home.screen_route) {
             HomeScreen(name = "Android")
         }
+        composable(BottomNavItems.Message.screen_route) {
+            MessageScreen()
+        }
         composable(BottomNavItems.Article.screen_route) {
             ArticleScreen()
         }
@@ -48,6 +51,7 @@ fun BottomNavigation(
 
     val items = listOf(
         BottomNavItems.Home,
+        BottomNavItems.Message,
         BottomNavItems.Article,
         BottomNavItems.Profile
     )
@@ -63,10 +67,6 @@ fun BottomNavigation(
                 icon = { Icon(
                     imageVector = item.icon,
                     contentDescription = "${item.title} icon")
-                },
-                label = {
-                    Text(text = item.title,
-                    fontSize = 20.sp)
                 },
                 selectedContentColor = Color(merahmuda.toColorInt()),
                 unselectedContentColor = Color.Black.copy(0.4f),

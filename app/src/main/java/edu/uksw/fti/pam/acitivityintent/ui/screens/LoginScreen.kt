@@ -13,6 +13,7 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
@@ -30,8 +31,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.Popup
 import androidx.core.graphics.toColorInt
 import edu.uksw.fti.pam.acitivityintent.HomeActivity
 import edu.uksw.fti.pam.acitivityintent.contracts.SignUpContract
@@ -61,80 +64,99 @@ val Typography = Typography (
 @Composable
 fun LoginForm() {
     val merahmuda = "#D93F3F"
+    val merahmuda2 = "#F7F7F7"
 
     val lContext = LocalContext.current
     var usernameInput by remember { mutableStateOf("") }
     var passwordInput by remember { mutableStateOf("") }
+    var showError by remember { mutableStateOf(false) }
 
     val getUsernameFromSignedUpForm = rememberLauncherForActivityResult(
         contract = SignUpContract(),
         onResult = { usernameInput = it!! })
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(20.dp)
-            .padding(top = 100.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
-    ) {
-        Image(painter = painterResource(id = R.drawable.image_3), contentDescription = "")
-        OutlinedTextField(
-            value = usernameInput,
-            onValueChange = { usernameInput = it },
-            label = { Text(text = stringResource(R.string.label_username)) },
+    Surface(color = Color(merahmuda2.toColorInt()), modifier = Modifier.fillMaxSize()) {
+        Column(
             modifier = Modifier
-                .fillMaxWidth(),
-            leadingIcon = {
-                Icon(
-                    imageVector = Icons.Filled.Person, contentDescription = "",
-                    tint = Color(merahmuda.toColorInt())
-                )
-            }
-        )
-        OutlinedTextField(
-            value = passwordInput,
-            onValueChange = { passwordInput = it },
-            label = { Text(text = stringResource(R.string.label_password)) },
-            visualTransformation = PasswordVisualTransformation(),
-            modifier = Modifier
-                .fillMaxWidth(),
-            leadingIcon = {
-                Icon(
-                    imageVector = Icons.Filled.Lock, contentDescription = "",
-                    tint = Color(merahmuda.toColorInt())
-                )
-            }
-        )
-        Row(
-            horizontalArrangement = Arrangement.spacedBy(10.dp)
+                .fillMaxSize()
+                .padding(20.dp)
+                .padding(top = 100.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            Button(
-                colors = ButtonDefaults.buttonColors(backgroundColor = Color(merahmuda.toColorInt())),
+            Image(painter = painterResource(id = R.drawable.image_3), contentDescription = "")
+            OutlinedTextField(
+                value = usernameInput,
+                onValueChange = { usernameInput = it },
+                label = { Text(text = stringResource(R.string.label_username)) },
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 10.dp),
-                onClick = {
-                    val isAuthenticated = doAuth(usernameInput, passwordInput)
-                    if (isAuthenticated) {
-                        lContext.startActivity(
-                            Intent(lContext, HomeActivity::class.java)
-                                .apply {
-                                    putExtra("username", usernameInput)
-                                }
-                        )
-                    }
+                    .fillMaxWidth(),
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Filled.Person, contentDescription = "",
+                        tint = Color(merahmuda.toColorInt())
+                    )
                 }
+            )
+            OutlinedTextField(
+                value = passwordInput,
+                onValueChange = { passwordInput = it },
+                label = { Text(text = stringResource(R.string.label_password)) },
+                visualTransformation = PasswordVisualTransformation(),
+                modifier = Modifier
+                    .fillMaxWidth(),
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Filled.Lock, contentDescription = "",
+                        tint = Color(merahmuda.toColorInt())
+                    )
+                }
+            )
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(10.dp)
             ) {
-                Text(text = stringResource(R.string.btn_title_login), color = Color.White, style = MaterialTheme.typography.h5)
+                Button(
+                    colors = ButtonDefaults.buttonColors(backgroundColor = Color(merahmuda.toColorInt())),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 10.dp),
+                    onClick = {
+                        val isAuthenticated = doAuth(usernameInput, passwordInput)
+                        if (usernameInput == "admin" && passwordInput == "admin") {
+                            lContext.startActivity(
+                                Intent(lContext, HomeActivity::class.java)
+                                    .apply {
+                                        putExtra("username", usernameInput)
+                                    }
+                            )
+                        }
+                        else {
+                            showError = true
+                        }
+                    }
+                ) {
+                    Text(
+                        text = stringResource(R.string.btn_title_login),
+                        color = Color.White,
+                        style = MaterialTheme.typography.h5
+                    )
+                }
+            }
+            ClickableText(text = buildAnnotatedString {
+                append(text = stringResource(id = R.string.not_have_account))
+                withStyle(style = SpanStyle(color = Color(merahmuda.toColorInt())),) {
+                    append(text = stringResource(id = R.string.btn_title_signup))
+                }
+            }, onClick = {
+                getUsernameFromSignedUpForm.launch("")
+            })
+            if (showError) {
+                Text(
+                    text = "Username atau password salah!",
+                    style = MaterialTheme.typography.body2,
+                    color = Color.Red,
+                    modifier = Modifier.align(Alignment.CenterHorizontally)
+                )
             }
         }
-        ClickableText(text = buildAnnotatedString {
-            append(text = stringResource(id = R.string.not_have_account))
-            withStyle(style = SpanStyle(color = Color(merahmuda.toColorInt())), ) {
-                append(text = stringResource(id = R.string.btn_title_signup))
-            }
-        }, onClick = {
-            getUsernameFromSignedUpForm.launch("")
-        })
     }
 }
 
